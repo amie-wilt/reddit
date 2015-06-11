@@ -1,3 +1,13 @@
 <h1>Reddit (bookmark index page)</h1>
 
-<%=  %>
+<% @bookmarks.each do |bookmark| %>
+    <div>
+      <%= bookmark.url %>
+      <%= bookmark.title %>
+      <%= bookmark.description %>
+
+      <%= link_to 'Show', bookmark %>
+    </div>
+<% end %>
+
+<%= link_to 'New Bookmark', new_bookmark_path %>

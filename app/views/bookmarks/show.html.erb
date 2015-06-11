@@ -1,2 +1,13 @@
+<p id="notice"><%= notice %></p>
+
 <h1>Bookmarks#show</h1>
-<p>Find me in app/views/bookmarks/show.html.erb</p>
+
+<%= @bookmark.url %>
+<%= @bookmark.title %>
+<%= @bookmark.description %>
+
+<%= link_to 'Back to Bookmarks', bookmarks_path(@bookmarks) %>
+<%= link_to 'New Bookmark', new_bookmark_path %>
+<%= link_to 'Edit', edit_bookmark_path(@bookmark) %>
+
+

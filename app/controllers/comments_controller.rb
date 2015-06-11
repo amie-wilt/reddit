@@ -16,6 +16,8 @@ class CommentsController < ApplicationController
     end
   end
 
+  # Add edit and destroy actions
+
   private
 
   def set_comment

@@ -1,13 +1,9 @@
 Rails.application.routes.draw do
-  get 'bookmarks/index'
+  resources :bookmarks do
+    resources :comments, :only => [:create, :edit, :destroy]
+  end
 
-  get 'bookmarks/show'
-
-  get 'bookmarks/_form'
-
-  get 'bookmarks/edit'
-
-  get 'bookmarks/new'
+  root 'bookmarks#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

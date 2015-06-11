@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20150611195015) do
     t.string   "author_name"
     t.string   "author_email"
     t.text     "body"
+    t.integer  "bookmark_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
