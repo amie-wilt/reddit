@@ -4,6 +4,7 @@ class CreateComments < ActiveRecord::Migration
       t.string :author_name
       t.string :author_email
       t.text :body
+      t.references :bookmark
 
       t.timestamps null: false
     end
