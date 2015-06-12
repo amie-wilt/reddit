@@ -6,8 +6,53 @@
 <%= @bookmark.title %>
 <%= @bookmark.description %><br>
 
+<% if current_user %>
+    <%= link_to 'Edit', edit_bookmark_path(@bookmark) %><br>
+    <%= link_to 'New Bookmark', new_bookmark_path %><br>
+
+<% end %><br>
 <%= link_to 'Back to Bookmarks', bookmarks_path(@bookmarks) %><br>
-<%= link_to 'New Bookmark', new_bookmark_path %><br>
-<%= link_to 'Edit', edit_bookmark_path(@bookmark) %>
+
+<% if current_user %>
+    <%= form_for [@bookmark, @comment] do |f| %>
+        <% if @comment.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this bookmark from being saved:</h2>
+
+              <ul>
+                <% @comment.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+        <% end %>
+
+        <div class="field">
+          <%= f.label :author_name, "Name" %>
+          <%= f.text_field :author_name %>
+        </div>
+        <div class="field">
+          <%= f.label :author_email, "Email" %>
+          <%= f.text_field :author_email %>
+        </div>
+        <div class="field">
+          <%= f.label :body, "Comment" %><br>
+          <%= f.text_area :body %>
+        </div>
+        <%= f.submit "Add comment" %>
+    <% end %>
+<% end %>
+
+<h2>Comments</h2>
+
+<% @bookmark.comments.each do |comment| %>
+    <div class="comment-container">
+      <span><%= comment.author_name %></span>
+      <span><%= comment.author_email %></span>
+
+      <p><%= comment.body %></p>
+    </div>
+<% end %>
+</div>
 
 
