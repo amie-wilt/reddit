@@ -1,6 +1,11 @@
 class BookmarksController < ApplicationController
+  #before_action :authenticate_user!, :except => [:index, :show]
   def index
-    @bookmarks = Bookmark.page(params[:page]).per(5)
+    if params[:mine]
+      @bookmarks = current_user.try(:bookmarks)
+    else
+      @bookmarks = Bookmark.page(params[:page]).per(5)
+    end
   end
 
   def show
@@ -9,7 +14,7 @@ class BookmarksController < ApplicationController
   end
 
   def new
-    @bookmark = Bookmark.new
+    @bookmark = current_user.bookmarks.new
   end
 
   def edit
@@ -41,11 +46,11 @@ class BookmarksController < ApplicationController
   private
 
   def set_bookmark
-    @bookmark = Bookmark.find(params[:id])
+    @bookmark = current_user.bookmarks.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def bookmark_params
-    params.require(:bookmark).permit(:url, :title, :description)
+    params.require(:bookmark).permit(:user_id, :url, :title, :description)
   end
 end

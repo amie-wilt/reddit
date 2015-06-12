@@ -8,6 +8,7 @@
 
 <%= link_to 'Back to Bookmarks', bookmarks_path(@bookmarks) %>
 <%= link_to 'New Bookmark', new_bookmark_path %>
-<%= link_to 'Edit', edit_bookmark_path(@bookmark) %>
-
+<%= if current_user %>
+  <%= link_to 'Edit', edit_bookmark_path(@bookmark) %>
+<% end %>
 

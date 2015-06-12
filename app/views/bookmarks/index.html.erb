@@ -1,4 +1,22 @@
 <h1>Reddit Aaron(bookmark index page)</h1>
+  <% if current_user %>
+    <%= link_to new_bookmark_path, class: 'btn btn-primary' do %>
+      New Bookmark
+    <% end %>
+
+    <% unless params[:mine] %>
+      <%= link_to bookmarks_path(mine: true), class: 'btn btn-default' do %>
+        Mine
+      <% end %>
+    <% else %>
+      <%= link_to bookmarks_path, class: 'btn btn-default' do %>
+        All
+      <% end %>
+    <% end %>
+  <% end %>
+
+
+
 
 <% @bookmarks.each do |bookmark| %>
     <div>
