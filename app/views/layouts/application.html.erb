@@ -8,7 +8,8 @@
 </head>
 <body>
   <% unless current_user %>
-    <%= link_to "Sign In", new_user_session_path %>
+    <%= link_to "Sign In", new_user_session_path %></br>
+    <%= link_to 'Sign up', new_user_registration_path %>
   <% else %>
     <form action="<%= destroy_user_session_path %>" method="POST" >
       <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
