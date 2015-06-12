@@ -1,6 +1,6 @@
 class BookmarksController < ApplicationController
   def index
-    @bookmarks = Bookmark.all
+    @bookmarks = Bookmark.page(params[:page]).per(5)
   end
 
   def show
