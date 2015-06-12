@@ -50,7 +50,7 @@ class BookmarksController < ApplicationController
   def upvote
     @bookmark = Bookmark.find(params[:id])
     @bookmark.votes.create
-    redirect_to(bookmarks_url)
+    redirect_to(bookmarks_path)
   end
 
   private
