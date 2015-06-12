@@ -47,6 +47,12 @@ class BookmarksController < ApplicationController
     redirect_to bookmarks_url, notice: 'Bookmark was successfully destroyed.'
   end
 
+  def upvote
+    @bookmark = Bookmark.find(params[:id])
+    @bookmark.votes.create
+    redirect_to(bookmarks_url)
+  end
+
   private
 
   def set_bookmark
