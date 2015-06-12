@@ -18,14 +18,14 @@ class BookmarksController < ApplicationController
   end
 
   def new
-    @bookmark = Bookmark.new
+    @bookmark = current_user.bookmarks.new
   end
 
   def edit
   end
 
   def create
-    @bookmark = Bookmark.new(bookmark_params)
+    @bookmark = current_user.bookmarks.new(bookmark_params)
 
     if @bookmark.save
       redirect_to @bookmark, notice: 'Bookmark was successfully created.'
