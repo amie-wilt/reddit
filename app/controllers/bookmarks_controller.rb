@@ -6,7 +6,7 @@ class BookmarksController < ApplicationController
 
   def index
     if params[:mine]
-      @bookmarks = current_user.try(:bookmarks).page(params[:page])
+      @bookmarks = current_user.try(:bookmarks).page(params[:page]).order("Bookmark.votes DESC")
     else
       @bookmarks = Bookmark.page(params[:page]).per(5)
     end
@@ -61,6 +61,6 @@ class BookmarksController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def bookmark_params
-    params.require(:bookmark).permit(:user_id, :url, :title, :description)
+    params.require(:bookmark).permit(:user_id, :url, :title, :description, :votes)
   end
 end
