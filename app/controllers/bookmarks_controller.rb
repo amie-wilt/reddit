@@ -14,7 +14,7 @@ class BookmarksController < ApplicationController
   end
 
   def new
-    @bookmark = current_user.bookmarks.new
+    @bookmark = Bookmark.new
   end
 
   def edit
