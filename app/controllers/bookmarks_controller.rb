@@ -2,7 +2,7 @@ class BookmarksController < ApplicationController
   #before_action :authenticate_user!, :except => [:index, :show]
   def index
     if params[:mine]
-      @bookmarks = current_user.try(:bookmarks)
+      @bookmarks = current_user.try(:bookmarks).page(params[:page])
     else
       @bookmarks = Bookmark.page(params[:page]).per(5)
     end
