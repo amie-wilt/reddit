@@ -20,6 +20,8 @@
       <%= bookmark.url %>
       <%= bookmark.title %>
       <%= bookmark.description %>
+      <%= pluralize(bookmark.votes.count, "vote") %>
+      <%= button_to '+1', upvote_bookmark_path(bookmark), method: :post %>
 
       <%= link_to 'Show', bookmark %>
     </div>
