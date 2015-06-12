@@ -1,1 +1,1 @@
-web: bundle exec bin/rails server
+web: bundle exec bin/rails server -p $PORT
