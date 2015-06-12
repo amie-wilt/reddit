@@ -1,5 +1,9 @@
 class BookmarksController < ApplicationController
+
+  before_action :set_bookmark, only: [:edit, :update, :destroy]
+
   #before_action :authenticate_user!, :except => [:index, :show]
+
   def index
     if params[:mine]
       @bookmarks = current_user.try(:bookmarks).page(params[:page])
