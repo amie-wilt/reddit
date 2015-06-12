@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :bookmarks do
     resources :comments, :only => [:create, :edit, :destroy]
   end
