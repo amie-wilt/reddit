@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
       if @comment.save
         format.html { redirect_to @bookmark, notice: 'Your comment was successfully created.' }
       else
-        format.html { render 'bookmark/show' }
+        format.html { render 'bookmarks/show' }
       end
     end
   end

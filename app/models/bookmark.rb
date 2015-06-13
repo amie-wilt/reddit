@@ -5,4 +5,11 @@ class Bookmark < ActiveRecord::Base
 
   validates :url, presence: true
   validates :title, presence: true
+
+  def vote_count
+    @bookmarks = Bookmark.all
+    @bookmarks.each do |bookmark|
+      bookmark.count
+    end
+  end
 end

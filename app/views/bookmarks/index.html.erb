@@ -1,32 +1,34 @@
-<h1>Reddit Aaron(bookmark index page)</h1>
+<div class="page-container">
+  <h1>Reddit Aaron(bookmark index page)</h1>
   <% if current_user %>
-    <%= link_to new_bookmark_path, class: 'btn btn-primary' do %>
-      New Bookmark
-    <% end %>
+      <%= link_to new_bookmark_path, class: 'btn btn-primary' do %>
+          New Bookmark
+      <% end %>
 
-    <% unless params[:mine] %>
-      <%= link_to bookmarks_path(mine: true), class: 'btn btn-default' do %><br>
-        Mine
+      <% unless params[:mine] %>
+          <%= link_to bookmarks_path(mine: true), class: 'btn btn-default' do %><br>
+              Mine
+          <% end %>
+      <% else %>
+          <%= link_to bookmarks_path, class: 'btn btn-default' do %>
+              All
+          <% end %>
       <% end %>
-    <% else %>
-      <%= link_to bookmarks_path, class: 'btn btn-default' do %>
-        All
-      <% end %>
-    <% end %>
   <% end %>
 
-<% @bookmarks.each do |bookmark| %>
-    <div>
-      <%= bookmark.url %>
-      <%= bookmark.title %>
-      <%= bookmark.description %>
-      <%= pluralize(bookmark.votes.count, "vote") %>
-      <%= button_to '+1', upvote_bookmark_path(bookmark), method: :post %>
+  <% @bookmarks.each do |bookmark| %>
+      <div class="bookmark-container">
+        <span class="bookmark-title"><%= link_to truncate(bookmark.title, length: 120), "www.google.com" %>: </span>
+        <span class="bookmark-url"><%= bookmark.url %></span>
+        <span class="bookmark-vote-count">(<%= pluralize(bookmark.votes.count, "vote") %>)</span>
+        <%= button_to '+1', upvote_bookmark_path(bookmark), method: :post, class: "vote-button" %>
+        <span class="bookmark-show"><%= link_to 'Show', bookmark %></span>
+        <p class="bookmark-description"><%= bookmark.description %></p>
+        
+      </div>
+  <% end %>
 
-      <%= link_to 'Show', bookmark %>
-    </div>
-<% end %>
-
-<%= paginate @bookmarks, :window => 2 %>
+  <%= paginate @bookmarks, :window => 2 %>
+</div>
 
 

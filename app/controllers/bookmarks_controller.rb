@@ -6,7 +6,7 @@ class BookmarksController < ApplicationController
 
   def index
     if params[:mine]
-      @bookmarks = current_user.try(:bookmarks).page(params[:page]).order("Bookmark.votes DESC")
+      @bookmarks = current_user.try(:bookmarks).page(params[:page]).sort_by(bookmark.vote_count)
     else
       @bookmarks = Bookmark.page(params[:page]).per(5)
     end

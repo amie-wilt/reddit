@@ -6,11 +6,12 @@
 <%= @bookmark.title %>
 <%= @bookmark.description %><br>
 
-<% if current_user %>
+<% if current_user && @bookmark.user == current_user %>
     <%= link_to 'Edit', edit_bookmark_path(@bookmark) %><br>
-    <%= link_to 'New Bookmark', new_bookmark_path %><br>
-
 <% end %><br>
+<% if current_user %>
+    <%= link_to 'New Bookmark', new_bookmark_path %><br>
+<% end %>
 <%= link_to 'Back to Bookmarks', bookmarks_path(@bookmarks) %><br>
 
 <% if current_user %>
