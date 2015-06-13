@@ -18,11 +18,24 @@
 
   <% @bookmarks.each do |bookmark| %>
       <div class="bookmark-container">
-        <span class="bookmark-title"><%= link_to truncate(bookmark.title, length: 120), "www.google.com" %>: </span>
+        <span class="bookmark-title"><%= link_to truncate(bookmark.title, length: 120), bookmark.url %>: </span>
         <span class="bookmark-url"><%= bookmark.url %></span>
         <span class="bookmark-show"><%= link_to 'Show', bookmark %></span>
+
         <p class="bookmark-description"><%= bookmark.description %></p>
-        
+
+        <div class="btn-group">
+          <%= link_to like_bookmark_path(bookmark), method: :put, class: "btn btn-default btn-sm" do %>
+              <span class="glyphicon glyphicon-chevron-up"></span>
+              Upvote
+              <%= bookmark.get_upvotes.size %>
+          <% end %>
+          <%= link_to dislike_bookmark_path(bookmark), method: :put, class: "btn btn-default btn-sm" do %>
+              <span class="glyphicon glyphicon-chevron-down"></span>
+              Downvote
+              <%= bookmark.get_downvotes.size %>
+          <% end %>
+        </div>
       </div>
   <% end %>
 

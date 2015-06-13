@@ -49,9 +49,16 @@ class BookmarksController < ApplicationController
 
   def upvote
     @bookmark = Bookmark.find(params[:id])
-    @bookmark.votes.create
-    redirect_to(bookmarks_path)
+    @bookmark.upvote_by current_user
+    redirect_to :back
   end
+
+  def downvote
+    @bookmark = Bookmark.find(params[:id])
+    @bookmark.downvote_by current_user
+    redirect_to :back
+  end
+
 
   private
 
