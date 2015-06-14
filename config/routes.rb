@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   resources :bookmarks do
     resources :comments, :only => [:create, :edit, :destroy]
     member do
-      post 'upvote'
+      put "like", to: "bookmarks#upvote"
+      put "dislike", to: "bookmarks#downvote"
     end
   end
 
