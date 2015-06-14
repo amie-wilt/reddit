@@ -3,54 +3,59 @@
 
   <h1>Bookmarks#show</h1>
 
-  <%= @bookmark.url %>
-  <%= @bookmark.title %>
-  <%= @bookmark.description %><br>
+  <div class="bookmark-show-container">
+    <span class="bookmark-title"><%= @bookmark.title %></span>
+    <span class="bookmark-url">(<%= @bookmark.url %>)</span>
+
+    <p class="bookmark-description"><%= @bookmark.description %></p>
+  </div>
 
   <% if current_user && @bookmark.user == current_user %>
-      <%= link_to 'Edit', edit_bookmark_path(@bookmark) %><br>
-  <% end %><br>
+      <%= link_to 'Edit', edit_bookmark_path(@bookmark) %>
+  <% end %>
   <% if current_user %>
-      <%= link_to 'New Bookmark', new_bookmark_path %><br>
+      | <%= link_to 'New Bookmark', new_bookmark_path %><br>
   <% end %>
   <%= link_to 'Back to Bookmarks', bookmarks_path(@bookmarks) %><br>
 
   <% if current_user %>
-      <%= form_for [@bookmark, @comment] do |f| %>
-          <% if @comment.errors.any? %>
-              <div id="error_explanation">
-                <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this bookmark from being saved:</h2>
+      <div class="form-container">
+        <%= form_for [@bookmark, @comment] do |f| %>
+            <% if @comment.errors.any? %>
+                <div id="error_explanation">
+                  <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this bookmark from being saved:</h2>
 
-                <ul>
-                  <% @comment.errors.full_messages.each do |message| %>
-                      <li><%= message %></li>
-                  <% end %>
-                </ul>
-              </div>
-          <% end %>
+                  <ul>
+                    <% @comment.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                    <% end %>
+                  </ul>
+                </div>
+            <% end %>
 
-          <div class="field">
-            <%= f.label :author_name, "Name" %>
-            <%= f.text_field :author_name %>
-          </div>
-          <div class="field">
-            <%= f.label :author_email, "Email" %>
-            <%= f.text_field :author_email %>
-          </div>
-          <div class="field">
-            <%= f.label :body, "Comment" %><br>
-            <%= f.text_area :body %>
-          </div>
-          <%= f.submit "Add comment" %>
-      <% end %>
+            <div class="field">
+              <%= f.label :author_name, "Name" %>
+              <%= f.text_field :author_name %>
+            </div>
+            <div class="field">
+              <%= f.label :author_email, "Email" %>
+              <%= f.text_field :author_email %>
+            </div>
+            <div class="field">
+              <%= f.label :body, "Comment" %><br>
+              <%= f.text_area :body %>
+            </div>
+            <%= f.submit "Add comment" %>
+        <% end %>
+      </div>
   <% end %>
 
   <h2>Comments</h2>
 
   <% @bookmark.comments.each do |comment| %>
       <div class="comment-container">
-        <span><%= comment.author_name %></span>
-        <span><%= comment.author_email %></span>
+        <span class="author"><%= comment.author_name %></span>
+        <span class="author-email">(<%= comment.author_email %>)</span>
 
         <p><%= comment.body %></p>
       </div>

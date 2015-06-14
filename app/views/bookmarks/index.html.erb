@@ -1,5 +1,4 @@
 <div class="page-container">
-  <h1>Reddit Aaron(bookmark index page)</h1>
   <% if current_user %>
       <%= link_to new_bookmark_path, class: 'btn btn-primary' do %>
           New Bookmark
@@ -16,6 +15,8 @@
       <% end %>
   <% end %>
 
+  <h1>Welcome to Amie & Aaron's Reddit</h1>
+
   <% @bookmarks.each do |bookmark| %>
       <div class="bookmark-container">
         <span class="bookmark-title"><%= link_to truncate(bookmark.title, length: 120), bookmark.url %>: </span>
@@ -28,7 +29,7 @@
           <%= link_to like_bookmark_path(bookmark), method: :put, class: "btn btn-default btn-sm" do %>
               <span class="glyphicon glyphicon-chevron-up"></span>
               Upvote
-              <%= bookmark.get_upvotes.size %>
+              <%= bookmark.get_upvotes.size %> |
           <% end %>
           <%= link_to dislike_bookmark_path(bookmark), method: :put, class: "btn btn-default btn-sm" do %>
               <span class="glyphicon glyphicon-chevron-down"></span>

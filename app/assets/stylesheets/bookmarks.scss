@@ -10,18 +10,49 @@
   padding: 50px;
 }
 
-.bookmark-container {
-  line-height: 0.5;
-  margin: 20px 0;
+.btn-primary {
+
 }
 
-.new_bookmark {
+.bookmark-container {
+  line-height: 0.5;
+  margin: 30px 50px;
+  border-bottom: 1px dashed rgba(0,0,0,1);
+  padding-bottom: 20px;
+}
+
+.bookmark-show-container {
+  margin: 50px;
+}
+
+.bookmark-url {
+  font-style: italic;
+}
+
+.new_bookmark,
+.new_comment {
   text-align: center;
 }
 
 .form-container {
   margin: 0 auto;
   max-width: 500px;
+
+  label {
+    display: block;
+  }
+
+  input,
+  textarea {
+    border-radius: 3px;
+    margin-bottom: 20px;
+    padding: 5px;
+  }
+
+  textarea {
+    width: 200px;
+    height: 100px;
+  }
 }
 
 .button_to {
