@@ -36,10 +36,15 @@
 
 .form-container {
   margin: 0 auto;
-  max-width: 500px;
+  max-width: 300px;
+  background-color: rgba(155, 160, 180, 0.5);
+  padding: 30px;
+  box-sizing: border-box;
+  border-radius: 5px;
 
   label {
     display: block;
+    padding-bottom: 10px;
   }
 
   input,
@@ -47,11 +52,25 @@
     border-radius: 3px;
     margin-bottom: 20px;
     padding: 5px;
+    border: none;
   }
 
   textarea {
     width: 200px;
     height: 100px;
+  }
+
+  input[type="submit"] {
+    color: #fff;
+    padding: 10px;
+    background-color: rgba(8, 207, 0, 1);
+    border: none;
+    font-size: 14px;
+    transition: 0.2s ease;
+
+    &:hover {
+      color: #888;
+    }
   }
 }
 
