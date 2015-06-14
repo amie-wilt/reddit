@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150613145726) do
+ActiveRecord::Schema.define(version: 20150614135423) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,11 +20,25 @@ ActiveRecord::Schema.define(version: 20150613145726) do
     t.string   "url"
     t.string   "title"
     t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
     t.integer  "user_id"
+    t.integer  "cached_votes_total",      default: 0
+    t.integer  "cached_votes_score",      default: 0
+    t.integer  "cached_votes_up",         default: 0
+    t.integer  "cached_votes_down",       default: 0
+    t.integer  "cached_weighted_score",   default: 0
+    t.integer  "cached_weighted_total",   default: 0
+    t.float    "cached_weighted_average", default: 0.0
   end
 
+  add_index "bookmarks", ["cached_votes_down"], name: "index_bookmarks_on_cached_votes_down", using: :btree
+  add_index "bookmarks", ["cached_votes_score"], name: "index_bookmarks_on_cached_votes_score", using: :btree
+  add_index "bookmarks", ["cached_votes_total"], name: "index_bookmarks_on_cached_votes_total", using: :btree
+  add_index "bookmarks", ["cached_votes_up"], name: "index_bookmarks_on_cached_votes_up", using: :btree
+  add_index "bookmarks", ["cached_weighted_average"], name: "index_bookmarks_on_cached_weighted_average", using: :btree
+  add_index "bookmarks", ["cached_weighted_score"], name: "index_bookmarks_on_cached_weighted_score", using: :btree
+  add_index "bookmarks", ["cached_weighted_total"], name: "index_bookmarks_on_cached_weighted_total", using: :btree
   add_index "bookmarks", ["user_id"], name: "index_bookmarks_on_user_id", using: :btree
 
   create_table "comments", force: :cascade do |t|
