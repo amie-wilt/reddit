@@ -6,9 +6,9 @@ class BookmarksController < ApplicationController
 
   def index
     if params[:mine]
-      @bookmarks = current_user.try(:bookmarks).page(params[:page])
+      @bookmarks = current_user.try(:bookmarks).page(params[:page]).order(:cached_votes_total => :desc)
     else
-      @bookmarks = Bookmark.page(params[:page]).per(5)
+      @bookmarks = Bookmark.page(params[:page]).per(5).order(:cached_votes_total => :desc)
     end
   end
 
@@ -49,9 +49,16 @@ class BookmarksController < ApplicationController
 
   def upvote
     @bookmark = Bookmark.find(params[:id])
-    @bookmark.votes.create
-    redirect_to(bookmarks_path)
+    @bookmark.upvote_by current_user
+    redirect_to :back
   end
+
+  def downvote
+    @bookmark = Bookmark.find(params[:id])
+    @bookmark.downvote_by current_user
+    redirect_to :back
+  end
+
 
   private
 
@@ -61,6 +68,6 @@ class BookmarksController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def bookmark_params
-    params.require(:bookmark).permit(:user_id, :url, :title, :description)
+    params.require(:bookmark).permit(:user_id, :url, :title, :description, :votes)
   end
 end
